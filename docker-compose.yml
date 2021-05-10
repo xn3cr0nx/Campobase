@@ -1,25 +1,25 @@
-version: '3.7'
+version: "3.7"
 
 x-env: &env production
-x-decidim: &decidim 0.23.0
-x-ruby: &ruby 
+x-decidim: &decidim 0.23.6
+x-ruby: &ruby
   RUBY_VERSION: 2.6.6
 x-pg-env: &pg-env
   POSTGRES_USER: &pg-user postgres
   POSTGRES_PASSWORD:
-  POSTGRES_DB: &pg-db azione-decidim_production
+  POSTGRES_DB: &pg-db base-decidim_production
   POSTGRES_HOST_AUTH_METHOD: trust
 
 x-admin: &admin
   ADMIN_EMAIL: &admin_email patrick.jusic@uspace.it
-  ADMIN_PASSWORD: azione_decidim
+  ADMIN_PASSWORD: base_decidim
 x-org: &org
-  ORG_NAME: &org_name PartecipAzione
-  ORG_HOST: &org_host partecip.azione.it
+  ORG_NAME: &org_name Campobase
+  ORG_HOST: &org_host campobase.baseitalia.net
   ORG_ADMIN: &org_admin patrickjusic96@gmail.com
 
 x-smtp: &smtp
-  SMTP_HOST: &smtp_host in-v3.mailjet.com 
+  SMTP_HOST: &smtp_host in-v3.mailjet.com
   SMTP_PORT: 25
   SMTP_DOMAIN: uspace.it
   SMTP_ADDRESS: *smtp_host
@@ -40,8 +40,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - decidim-gems:/usr/local/bundle:delegated
-      - decidim-config:/home/decidim/azione-decidim/config
-      - decidim-uploads:/home/decidim/azione-decidim/public/uploads
+      - decidim-config:/home/decidim/base-decidim/config
+      - decidim-uploads:/home/decidim/base-decidim/public/uploads
     environment:
       PORT: 3000
       DATABASE_HOST: pg
@@ -49,7 +49,7 @@ services:
       DATABASE_NAME: *pg-db
       RAILS_ENV: *env
       REDIS_URL: redis://redis:6379
-      DATABASE_URL: postgres://postgres@pg:5432/azione-decidim_production
+      DATABASE_URL: postgres://postgres@pg:5432/base-decidim_production
       RAILS_SERVE_STATIC_FILES: "true"
       SECRETKEY: secret
       SECRET_KEY_BASE: secret
@@ -86,7 +86,7 @@ services:
     container_name: mailer
     restart: always
     <<: *network
-      
+
   nginx:
     image: bunkerity/bunkerized-nginx
     container_name: nginx
@@ -95,9 +95,9 @@ services:
       - 80:8080
       - 443:8443
     environment:
-      # AUTO_LETS_ENCRYPT: "yes" 
+      # AUTO_LETS_ENCRYPT: "yes"
       # REDIRECT_HTTP_TO_HTTPS: "yes"
-      SERVER_NAME: partecip.azione.it
+      SERVER_NAME: campobase.baseitalia.net
       DISABLE_DEFAULT_SERVER: "yes"
       ALLOWED_METHODS: "GET|POST|HEAD|OPTIONS|PUT|DELETE"
       WRITE_ACCESS: "yes"
@@ -111,7 +111,7 @@ services:
       - nginx-letsencrypt:/etc/letsencrypt
       - ./server-confs:/server-confs
       - ./http-confs:/http-confs
-    <<: *network 
+    <<: *network
 
 volumes:
   pg:

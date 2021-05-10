@@ -1,6 +1,6 @@
 export POSTGRES_USER ?= postgres
 export POSTGRES_PASSWORD ?=
-export POSTGRES_DB ?= azione-decidim_production
+export POSTGRES_DB ?= base-decidim_production
 export POSTGRES_HOST ?= pg
 DUMP = pg_dump
 RESTORE = pg_restore
@@ -45,10 +45,10 @@ db:
 
 db-dump:
 	$(DECIDIM) ${DUMP} -h ${POSTGRES_HOST} -U ${POSTGRES_USER} ${POSTGRES_DB} > dump.psql
-	@docker cp ${CONTAINER}:/home/decidim/azione-decidim/db/dump.psql ./backup/$(CURR_TIME).psql
+	@docker cp ${CONTAINER}:/home/decidim/base-decidim/db/dump.psql ./backup/$(CURR_TIME).psql
 
 db-restore:
-	@docker cp ./backup/$(version).psql ${CONTAINER}:/home/decidim/azione-decidim/db/dump.psql
+	@docker cp ./backup/$(version).psql ${CONTAINER}:/home/decidim/base-decidim/db/dump.psql
 	$(DECIDIM) ${RESTORE} -h ${POSTGRES_HOST} -U ${POSTGRES_USER} -d ${POSTGRES_DB} ./db/dump.psql
 
 db-migrate:

@@ -46,12 +46,12 @@ FROM base
 # USER decidim
 WORKDIR /home/decidim
 
-ENV DECIDIM_VERSION=${DECIDIM_VERSION:-0.23.0}
+ENV DECIDIM_VERSION=${DECIDIM_VERSION:-0.23.6}
 
 RUN gem install decidim:$DECIDIM_VERSION
-RUN decidim azione-decidim
+RUN decidim base-decidim
 
-WORKDIR /home/decidim/azione-decidim
+WORKDIR /home/decidim/base-decidim
 
 # install required dependencies
 RUN echo "gem 'omniauth-cas'\n\

@@ -2,12 +2,12 @@
 # encoding: utf-8
 
 RAILS_ENV=${RAILS_ENV:-"production"}
-ADMIN_EMAIL=${ADMIN_EMAIL:-"decidim@azione.it"}
-ADMIN_PASSWORD=${ADMIN_PASSWORD:-"azione_decidim"}
-ORG_ADMIN=${ORG_ADMIN:-"decidim@azione.it"}
-ORG_NAME=${ORG_NAME:-"PartecipAzione"}
+ADMIN_EMAIL=${ADMIN_EMAIL:-"campobase@baseitalia.net"}
+ADMIN_PASSWORD=${ADMIN_PASSWORD:-"base_decidim"}
+ORG_ADMIN=${ORG_ADMIN:-"campobase@baseitalia.net"}
+ORG_NAME=${ORG_NAME:-"Campobase"}
 ORG_HOST=${ORG_HOST:-"localhost:3000"}
-ORG_DESCRIPTION=${ORG_DESCRIPTION:-"PartecipAzione - piattaforma di democrazia partecipativa di Azione"}
+ORG_DESCRIPTION=${ORG_DESCRIPTION:-"Campobase - piattaforma di democrazia partecipativa di Base Italia"}
 ORG_ID=${ORG_ID:-1}
 LOCALE=${LOCALE:-"it"}
 SMTP_HOST=${SMTP_HOST:-"mailer"}
